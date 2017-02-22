@@ -1,0 +1,7 @@
+/* CSS declarations go here */
+#login-buttons {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 20px;
+}
