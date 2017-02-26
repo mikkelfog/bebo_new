@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { favNames } from '../../imports/collections/favNames';
+import { rejectNames } from '../../imports/collections/rejectNames';
 
-class Favlist extends Component {
-  onFavRemove(name) {
-    Meteor.call('fav.remove', name);
+class Rejectlist extends Component {
+  onRejectRemove(name) {
+    Meteor.call('reject.remove', name);
   }
   renderList() {
     return this.props.names.map(name=> {
@@ -14,7 +14,7 @@ class Favlist extends Component {
          <span className="pull-right">
           <button
             className="btn btn-danger"
-            onClick={() => this.onFavRemove(name)}>
+            onClick={() => this.onRejectRemove(name)}>
             Remove
           </button>
          </span>
@@ -26,7 +26,7 @@ class Favlist extends Component {
     return (
       <div>
         <h4>
-          Favorite List
+          Reject List
         </h4>
         <ul className="list-group">
           {this.renderList()}
@@ -37,6 +37,6 @@ class Favlist extends Component {
 }
 
 export default createContainer(() => {
-  Meteor.subscribe('favNames');
-  return { names: favNames.find({}).fetch() };
-}, Favlist);
+  Meteor.subscribe('rejectNames');
+  return { names: rejectNames.find({}).fetch() };
+}, Rejectlist);

@@ -15,11 +15,16 @@ Meteor.startup(() => {
   console.log(numberofallnames);
   var numberoffavnames = favNames.find().count();
   console.log(numberoffavnames);
-  Meteor.publish('allNames', function(name_num) {
-    return allNames.find({ number: name_num});
+  var numberofrejectnames = rejectNames.find().count();
+  console.log(numberofrejectnames);
+  Meteor.publish('allNames', function(NAME_NUM) {
+    return allNames.find({ number: { $gt: NAME_NUM, $lt: NAME_NUM+3 }});
   });
   Meteor.publish('favNames', function() {
-    return favNames.find({ownerId: this.userId});
+    return favNames.find({ owner: this.userId });
+  });
+  Meteor.publish('rejectNames', function() {
+    return rejectNames.find({ owner: this.userId });
   });
 });
 

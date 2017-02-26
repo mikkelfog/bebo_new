@@ -1,16 +1,18 @@
 import React from 'react';
 import Header from './header';
 import AllNames from './allnameslist';
-import favList from './favlist';
-import Namegen from './namegennew';
+import Favlist from './favlist';
+import Rejectlist from './rejectlist';
+import Namegen from './namegen';
 
 
 export default () => {
   return (
     <div>
       <Header />
-      <favList />
       <Namegen />
+      <Favlist />
+      <Rejectlist />
     </div>
   );
 };
