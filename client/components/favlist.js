@@ -13,7 +13,7 @@ class Favlist extends Component {
          <span>{name.name}</span>
          <span className="pull-right">
           <button
-            className="btn btn-danger"
+            className="remove-btn btn"
             onClick={() => this.onFavRemove(name)}>
             Remove
           </button>
@@ -25,12 +25,20 @@ class Favlist extends Component {
   render () {
     return (
       <div className="mainpage">
-        <h4>
-          Favorite List
-        </h4>
-        <ul className="list-group">
-          {this.renderList()}
-        </ul>
+        <div className="col-xs-0 col-md-3">
+        </div>
+        <div className="favoritelist col-xs-12 col-md-6">
+          <div className="headercontainer">
+            <h1>
+              Favoritliste
+            </h1>
+          </div>
+          <ul className="list-group">
+            {this.renderList()}
+          </ul>
+        </div>
+        <div className="col-xs-0 col-md-3">
+        </div>
       </div>
     );
   }
