@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+     "env": {
+       "MONGO_URL": "mongodb://databaseuser:databasepassword@ds137540.mlab.com:37540/bebonomo"
+     }
+   }
+}

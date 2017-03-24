@@ -1,6 +1,18 @@
 /* CSS declarations go here */
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+.mainpage {
+    height: 1200px;
+    background-image:url('http://www.bebonomo.dk/billeder/bebodkBG.png');
+    background-size: 500px;
+    background-repeat: repeat;
+    box-shadow: inset 0 0 0 1000px rgba(255,255,255,.5);
+}
+
 #login-buttons {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Amatic SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 18px !important;
   padding: 15px;
   font-size: 14px;
   line-height: 20px;
@@ -10,13 +22,66 @@
   line-height: 40px;
 }
 
+.headercontainer {
+  font-family: "Amatic SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  width: 60%;
+  margin: 0 auto 10px auto;
+}
+
+.headercontainer h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px !important;
+}
+
+.welcometext {
+  font-family: "Amatic SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  width: 55%;
+  margin: 10px auto 10px auto;
+}
+
+.nameGenerator {
+  font-family: "Amatic SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+p {
+  font-size: 24px !important;
+  font-weight: bold;
+}
+
 .name_holder {
   width: 200px !important;
-  height: 40px !important;
-  margin: 10px;
-  border: 2px solid #666666;
-  border-radius: 4px;
+  height: 60px !important;
+  margin: auto;
   padding: 10px 10px;
   display: block;
   text-align: center;
+  font-size: 32px;
+  vertical-align: text-top !important;
+  font-weight: bold;
+}
+
+.btn {
+  border: 2px solid #666666;
+  border-radius: 4px;
+  margin: 10px 5px;
+  font-size: 24px !important;
+  font-weight: bold;
+}
+
+.favorite-btn {
+    background-color: #84cfc5;
+    height: 50px;
+    width: 80.9px;
+
+}
+.reject-btn {
+    background-color: #f7aebc;
+    height: 50px;
+    width: 80.9px;
 }

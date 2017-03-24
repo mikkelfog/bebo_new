@@ -17,8 +17,8 @@ Meteor.startup(() => {
   console.log(numberoffavnames);
   var numberofrejectnames = rejectNames.find().count();
   console.log(numberofrejectnames);
-  Meteor.publish('allNames', function(NAME_NUM) {
-    return allNames.find({ number: { $gt: NAME_NUM, $lt: NAME_NUM+3 }});
+  Meteor.publish('allNames', function(NAME_START, NAME_END) {
+    return allNames.find({ number: { $gt: NAME_START, $lt: NAME_END }});
   });
   Meteor.publish('favNames', function() {
     return favNames.find({ owner: this.userId });

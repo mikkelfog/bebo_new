@@ -3,82 +3,95 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { allNames } from '../../imports/collections/allNames';
 import { favNames } from '../../imports/collections/favNames';
 
-window.NAME_NUM = Math.floor(Math.random() * 375);
+NAME_START = Math.floor(Math.random() * 375);
+NAME_END = NAME_START+3
+window.NAME_INDEX = 0
 
-const Namegen = function(props) {
+class Namegen extends Component {
   // props.names => an array of name objects.
   // props.name => our name model
-  return (
-    <div>
-      <span className="name_holder"></span>
-      <div>
-        <button onClick={function() {
-          console.log(NAME_NUM);
-          const nameslength = props.names.length;
-          console.log("names length now= "+props.names.length);
-          const lastname = props.names[nameslength-1].name;
-          console.log(lastname);
-          $(".name_holder").html(lastname);
+  render () {
+    return (
+      <div className="mainpage">
+        <div className="headercontainer">
+          <h1>Bebonomo</h1>
+        </div>
+        <div className="welcometext">
+          <p>Hej!</p>
+          <p>Denne side er lavet til at give dig inspiration til dit barns navn.</p>
+          <p>Indtast dit efternavn nedenfor og tryk på knappen for at se forslag til navne sammen med dit efternavn.</p>
+        </div>
+        <div className="nameGenerator">
+          <div>
+            <button onClick={() => {
+              const current_name = this.props.names[NAME_INDEX].name;
+              console.log(current_name);
+              $(".name_holder").html(current_name);
+              }
+            }
+            className="btn">
+              Start!
+            </button>
+          </div>
+          <div className="name_holder">
+          </div>
+          <button onClick={() => {
+            //favorites the current
+            event.preventDefault();
+            const current_name = this.props.names[NAME_INDEX].name;
+            Meteor.call('reject.insert', current_name);
+            //adds another name from the database to the subscription - til at starte med loader den tre navne, fordi den åbenbart første gang overskriver den oprindelige subscription
+            NAME_START = Math.floor(Math.random() * 375);
+            if ( NAME_INDEX === 0 ) {
+              NAME_END = NAME_START+4;
+              }
+              else {
+              NAME_END = NAME_START+2;
+              };
+            Meteor.subscribe('allNames', NAME_START, NAME_END);
+            //updates the current name and puts it in the current name box
+            window.NAME_INDEX = NAME_INDEX+1;
+            const newname = this.props.names[NAME_INDEX].name;
+            $(".name_holder").html(newname);
+            }
           }
-        }
-        className="btn favorite-btn">
-          Start!
-        </button>
-        <button onClick={function() {
-          console.log(NAME_NUM);
-          const nameslength = props.names.length;
-          console.log("names length now= "+props.names.length);
-          const lastname = props.names[nameslength-1].name;
-          console.log(lastname);
+          className="btn reject-btn">
+            Afvis
+          </button>
+          <button onClick={() => {
+            //favorites the current
+            event.preventDefault();
+            const current_name = this.props.names[NAME_INDEX].name;
+            Meteor.call('favorite.insert', current_name);
+            //adds another name from the database to the subscription - til at starte med loader den tre navne, fordi den åbenbart første gang overskriver den oprindelige subscription
+            NAME_START = Math.floor(Math.random() * 375);
+            if ( NAME_INDEX === 0 ) {
+              NAME_END = NAME_START+4;
+              }
+            else {
+              NAME_END = NAME_START+2;
+            };
+            Meteor.subscribe('allNames', NAME_START, NAME_END);
+            //updates the current name and puts it in the current name box
+            window.NAME_INDEX = NAME_INDEX+1;
+            const newname = this.props.names[NAME_INDEX].name;
+            $(".name_holder").html(newname);
+            }
           }
-        }
-        className="btn favorite-btn">
-          Length
-        </button>
+          className="btn favorite-btn">
+            Favorit
+          </button>
+        </div>
       </div>
-      <button onClick={function() {
-        event.preventDefault();
-        console.log("name length at start ="+props.names.length);
-        const current_name = allNames.findOne({ number: NAME_NUM}, {fields: {name:true}}).name;
-        console.log(current_name);
-        Meteor.call('favorite.insert', current_name);
-        window.NAME_NUM = Math.floor(Math.random() * 375);
-        console.log(NAME_NUM);
-        Meteor.subscribe('allNames', NAME_NUM);
-        const nameslength = props.names.length;
-        console.log("names length now= "+props.names.length);
-        const lastname = props.names[nameslength-1].name;
-        console.log(lastname);
-        $(".name_holder").html(lastname);
-        }
-      }
-      className="btn favorite-btn">
-        Favorite
-      </button>
-      <button onClick={function() {
-        event.preventDefault();
-        const current_name = allNames.findOne({ number: NAME_NUM}, {fields: {name:true}}).name;
-        Meteor.call('reject.insert', current_name);
-        window.NAME_NUM = Math.floor(Math.random() * 375);
-        console.log(NAME_NUM);
-        Meteor.subscribe('allNames', NAME_NUM);
-        const nameslength = props.names.length;
-        const lastname = props.names[nameslength-1].name;
-        console.log(lastname);
-        $(".name_holder").html(lastname);
-        }
-      }
-      className="btn reject-btn">
-        Reject
-      </button>
-  </div>
-);
+    );
+  }
 };
+
 
 
 export default createContainer( function() {
   //sets up subscription
-  Meteor.subscribe('allNames', NAME_NUM);
+  Meteor.subscribe('allNames', NAME_START, NAME_END);
   //returns what's inside the subscription to the component as props
   return { names: allNames.find({}).fetch()};
 }, Namegen);

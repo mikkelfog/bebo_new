@@ -24,7 +24,7 @@ class Favlist extends Component {
   }
   render () {
     return (
-      <div>
+      <div className="mainpage">
         <h4>
           Favorite List
         </h4>

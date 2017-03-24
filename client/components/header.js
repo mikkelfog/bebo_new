@@ -6,14 +6,14 @@ class Header extends Component {
     return (
       <nav className="nav navbar-default">
         <div className="navbar-header">
-          <a className="navbar-brand">Bebonomo</a>
+          <a className="navbar-brand" href="./">Bebonomo</a>
         </div>
         <ul className="nav navbar-nav">
           <li>
             <Accounts />
           </li>
           <li>
-            <a>Favorite List</a>
+            <a href="./Favlist">Favorite List</a>
           </li>
         </ul>
       </nav>
