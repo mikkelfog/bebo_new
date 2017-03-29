@@ -25,9 +25,9 @@ class Favlist extends Component {
   render () {
     return (
       <div className="mainpage">
-        <div className="col-xs-0 col-md-3">
+        <div className="col-sm-0 col-md-3">
         </div>
-        <div className="favoritelist col-xs-12 col-md-6">
+        <div className="favoritelist col-sm-12 col-md-6">
           <div className="headercontainer">
             <h1>
               Favoritliste
@@ -37,7 +37,7 @@ class Favlist extends Component {
             {this.renderList()}
           </ul>
         </div>
-        <div className="col-xs-0 col-md-3">
+        <div className="col-sm-0 col-md-3">
         </div>
       </div>
     );
